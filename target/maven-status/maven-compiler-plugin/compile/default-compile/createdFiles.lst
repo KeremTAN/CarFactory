@@ -1,0 +1,7 @@
+Models\Cars\CarsProduction.class
+Models\Cars\SpecialCar.class
+Models\CarsIterator.class
+Models\Cars\PrototypeCar.class
+App.class
+Models\Cars\HatchbackCar.class
+Models\Cars\SedanCar.class
