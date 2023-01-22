@@ -21,7 +21,18 @@ Also, in this abstract class, we have set the accessibility of the behaviors req
 they should occur in a final method called createTheCar. Since the createTheCar method is final, 
 the order of the production process is prevented from being interfered with by someone else. </br>
 
-![UML](https://github.com/KeremTAN/CarFactory/blob/master/img/createrTheCar.png) </br>
+```java
+protected final void createTheCar(){
+  System.out.println("... Car Producing Has Started ...");
+        skeletonOfCar();
+        engineProduce();
+        wheelDriveSystemOfCar();
+        seatsProduce();
+        euroNCAPTest();
+        System.out.println("A "+getCarColor()+ " "+getModelName()+" model vehicle was produced.");
+        System.out.println("...........................\n");
+    }
+```
 
 We have separated our vehicles according to body types for production.
 While our vehicles are being produced, each case type stores its own vehicles in a static dataset.
@@ -34,11 +45,28 @@ Here, the iterator design pattern is used. In this way, we did not have to rewri
 While applying the Iterator design pattern, we wrote a method that returns Iterator. In this method, the ".iterator" property is used for datasets stored as List.
 Again, for the data stored as a raw array in this method, a class that implements the Iterator interface is written and an instance of that class is created.
 
-![UML](https://github.com/KeremTAN/CarFactory/blob/master/img/theCarsList.png) </br>
+```java
+@Override
+public Iterator theCars() {
+  return allHatchbackCars.iterator();
+}
+```
 
-![UML](https://github.com/KeremTAN/CarFactory/blob/master/img/theCarsArray.png) </br>
+```java
+@Override
+public Iterator theCars() {
+  return new CarsIterator(allConceptCars);
+}
+```
 
-![UML](https://github.com/KeremTAN/CarFactory/blob/master/img/printCars.png) </br>
+```java
+public static void printCars(Iterator it) {
+  while (it.hasNext()) {
+    CarsProduction c = (CarsProduction) it.next();
+    System.out.println(c.toString());
+  }
+}
+```
 
 ### UML:
 #### Template Method Design Pattern
